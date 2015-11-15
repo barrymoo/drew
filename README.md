@@ -26,7 +26,7 @@ Navigate to [drew](http://drew-molecules.meteor.com/)
 
 * Install [jsdoc](http://usejsdoc.org/), `npm install -g jsdoc`
 * `./build-docs.sh`
-* `google-chrome-stable docs/index.html`
+* `google-chrome-stable .docs/index.html`
 
 ## To Do
 
