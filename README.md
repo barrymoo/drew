@@ -40,9 +40,3 @@ Navigate to [drew](http://drew-molecules.meteor.com/)
 * [Discover Meteor](https://book.discovermeteor.com)
 * [Meteor Docs](http://docs.meteor.com/#/basic)
 * [Three.js](http://threejs.org)
-
-## License
-
-I need to pick a license, but I need to get some input from people. For now, this code is free and I hope people will
-contribute in anyway they can. I am not personally liable for anything you do with the software. I am not personally
-liable for you using the software
