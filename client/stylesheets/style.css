@@ -1,0 +1,9 @@
+#sidebar {
+  padding: 0px;
+}
+
+.form-outline {
+    width: 100%;
+    outline: 1px solid black;
+    padding: 5px;
+}
