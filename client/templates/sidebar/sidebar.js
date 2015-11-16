@@ -1,11 +1,8 @@
-// _header event clicks
-Template._header.events({
-  'click .openFile': function (event) {
-    Session.set('fileOpenDialog', true);
-  }
-});
-
-// sideBarMain helpers
+/**
+ * @description
+ * # sideBarMain helpers
+ * Trigger dropdowns for fileOpenDialog
+ */
 Template.sideBarMain.helpers({
   fileOpenDialog: function () {
     var fileOpenDialog = Session.get('fileOpenDialog');
@@ -13,7 +10,11 @@ Template.sideBarMain.helpers({
   }
 });
 
-// sideBarMain event clicks
+/**
+ * @description
+ * # sideBarMain events
+ * Handle sideBarMain events
+ */
 Template.sideBarMain.events({
   'click #closeForm': function (event) {
     Session.set('fileOpenDialog', false);

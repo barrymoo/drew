@@ -4,7 +4,7 @@
  * * If the extension isn't recognized, the file is ignored
  * * Passes actual text from file to specified parser
  *
- * ### To do:
+ * ## To do:
  * * Send user to documentation to create a parser for their file type
  * * Link param to the called from menu
  * @param {string} file The file passed from menu
@@ -26,16 +26,13 @@ masterParser = function (file) {
 
 /**
  * @description
- * # Parser Success
- * ## Parser worked, create:
- * * Atoms
- * * Bonds
+ * # parserSuccess: call function from a parser to render atoms and bonds
  * ## Performance Consideration - Is it faster?
  * * pass objects in parsedData (more memory intensive)
  * * pass _id in parsedData and lookup object (less memory intensive)
  * ## To do:
  * * Check to see if previous molecule was rendered, it should be cleared first.
- * @param {Object} parsedData - A special data type, see {@link xyzParser}
+ * @param {Object} parsedData A special data type, see {@link xyzParser}
  */
 parserSuccess = function (parsedData) {
 
