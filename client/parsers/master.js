@@ -35,38 +35,32 @@ masterParser = function (file) {
  * @param {Object} parsedData A special data type, see {@link xyzParser}
  */
 parserSuccess = function (parsedData) {
+  var geometry = new THREE.BufferGeometry();
+  var length = parsedData.length;
+  var positions = new Float32Array(length * 3);
+  var colors = new Float32Array(length * 3);
 
-  // Render Atoms!
-  var id, spheres;
-  for (let i = 0; i < _.size(parsedData); i++) {
-    // Reset sphere
-    sphere = null;
+  var color = new THREE.Color();
 
-    // Render new sphere
-    id = AtomicData.findOne({_id: parsedData[i].dataId});
-    sphere = new THREE.Mesh(makeSphere(id.atomicRadius), makePointsMaterial(id.color));
-    sphere.position.x = parsedData[i].vector.x;
-    sphere.position.y = parsedData[i].vector.y;
-    sphere.position.z = parsedData[i].vector.z;
-    scene.add(sphere);
+  var i = 0;
+  for (i; i < length * 3; i += 3) {
+    var index = Math.floor(i / 3);
+    positions[i] = parsedData[index].vector.x;
+    positions[i + 1] = parsedData[index].vector.y;
+    positions[i + 2] = parsedData[index].vector.z;
+
+    color.setHex(parsedData[index].color);
+    colors[i] = color.r;
+    colors[i + 1] = color.g;
+    colors[i + 2] = color.b;
   }
 
+  geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.addAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-  // Render Bonds!
-  var idInner, idOuter, cylinder, distance, isBondDistance;
-  var bondBuffer = 0.3;
-  for (let i = 0; i < _.size(parsedData); i++) {
-    idOuter = AtomicData.findOne({_id: parsedData[i].dataId});
-    for (let j = i + 1; j < _.size(parsedData); j++) {
-      idInner = AtomicData.findOne({_id: parsedData[j].dataId});
-      distance = parsedData[i].vector.distanceTo(parsedData[j].vector);
-      isBondDistance = (idOuter.atomicRadius + idInner.atomicRadius + bondBuffer);
-      if (distance <= isBondDistance) {
-        scene.add(makeBond(parsedData[i].vector, parsedData[j].vector));
-      }
-    }
-  }
-
+  var material = new THREE.PointsMaterial({vertexColors: THREE.VertexColors});
+  var particleSystem = new THREE.Points(geometry, material);
+  scene.add(particleSystem);
   render();
 };
 

@@ -74,37 +74,6 @@ animate = function () {
 };
 
 /**
- * @name makeSphere
- * @summary
- * # Make an Atom from it's atomic radius
- * ## To do:
- * * Need to fix sizing logic (hydrogen is too big for example)
- * @param {atomicRadius} float - The radius for the sphere
- * @returns {THREE.SphereGeometry}
- */
-makeSphere = function (atomicRadius) {
-    var radius = atomicRadius;
-    if (radius >= 1.5) {
-        return new THREE.SphereGeometry(radius / 2, 32, 32);
-    } else if (radius >= 1) {
-        return new THREE.SphereGeometry(radius / 1.5, 32, 32);
-    } else {
-        return new THREE.SphereGeometry(radius, 32, 32);
-    }
-};
-
-/**
- * @name makePointsMaterial
- * @summary
- * # Make the PointsMaterial from the AtomicData color
- * @param {color} hex - hexadecimal color prefaced by 0x for three.js
- * @returns {THREE.PointsMaterial}
- */
-makePointsMaterial = function (color) {
-    return new THREE.PointsMaterial({color: color});
-};
-
-/**
  * @name makeBond
  * @summary
  * # Taking two Vector3 make a bond

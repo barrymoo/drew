@@ -22,3 +22,4 @@ iron:router
 accounts-password
 ian:accounts-ui-bootstrap-3
 fds:threejs
+kadira:debug
