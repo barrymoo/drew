@@ -39,7 +39,7 @@ if (Meteor.isServer) {
             number: 1,
             name: 'hydrogen',
             symbol: 'h',
-            color: hydrogen,
+            color: 0xffffff,
             atomicRadius: 0.53
         });
 

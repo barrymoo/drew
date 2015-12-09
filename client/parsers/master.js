@@ -94,7 +94,6 @@ parserSuccess = function (parsedData) {
   geometry.addAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   var particles = new THREE.Points(geometry, material);
-  console.log(colors);
   scene.add(particles);
   render();
 
