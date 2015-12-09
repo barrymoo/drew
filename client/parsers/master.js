@@ -104,7 +104,8 @@ parserSuccess = function (parsedData) {
     for (var j = i + 1; j < length; j++) {
       distanceTo = parsedData[i].vector.distanceTo(parsedData[j].vector);
       bondDistance = parsedData[i].atomicRadius + parsedData[j].atomicRadius;
-      if (distanceTo <= bondDistance) {
+      // distanceTo <= bondDistance + buffer
+      if (distanceTo <= (bondDistance + 0.5)) {
         pairs.push([i,j]);
       }
     }

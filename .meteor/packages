@@ -17,8 +17,7 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 twbs:bootstrap
-coffeescript
 iron:router
 accounts-password
 ian:accounts-ui-bootstrap-3
-barrymoo:threejs
+fds:threejs

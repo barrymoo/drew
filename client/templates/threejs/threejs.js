@@ -7,7 +7,7 @@ Template.threejsMain.onRendered(function () {
     // Initial Dimensions
     dim = computeSize();
     camera = new THREE.PerspectiveCamera(60, dim[0]/dim[1], 1, 1000);
-    camera.position.z = 20;
+    camera.position.z = 200;
 
     // The Controls
     controls = new THREE.TrackballControls(camera);
@@ -15,11 +15,11 @@ Template.threejsMain.onRendered(function () {
     controls.rotateSpeed = 10;
     controls.zoomSpeed = 5;
     controls.panSpeed = 5;
-		controls.staticMoving = true;
+	controls.staticMoving = true;
 
-		controls.keys = [65, 83, 68];
+	controls.keys = [65, 83, 68];
 
-		controls.addEventListener('change', render);
+	controls.addEventListener('change', render);
 
     // Generate our renderer, replacing our canvas
     scene = new THREE.Scene();
