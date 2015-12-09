@@ -69,6 +69,7 @@ render = function () {
 };
 
 animate = function () {
+  console.log('Here');
   requestAnimationFrame(animate);
   controls.update();
 };
