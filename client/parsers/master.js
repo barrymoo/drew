@@ -35,6 +35,7 @@ masterParser = function (file) {
  * @param {Object} parsedData A special data type, see {@link xyzParser}
  */
 parserSuccess = function (parsedData) {
+  console.log('Parser success');
   // Shaders and ShaderMaterial
   var vertex_shader = "\
     attribute float size;\
