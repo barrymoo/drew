@@ -86,6 +86,7 @@ parserSuccess = function (parsedData) {
     colors[i3 + 1] = color.g
     colors[i3 + 2] = color.b
   }
+  console.log(positions);
 
   // Set BufferAttributes
   var geometry = new THREE.BufferGeometry();
