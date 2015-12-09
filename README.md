@@ -1,6 +1,6 @@
 # drew
 
-All the commands below are examples from Arch Linux. It may change depending on what distribution you use.
+all the commands below are examples from Arch Linux. It may change depending on what distribution you use.
 
 ## Goals
 
