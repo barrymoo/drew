@@ -30,6 +30,20 @@
 AtomicData = new Mongo.Collection('atomicdata');
 if (Meteor.isServer) {
     if (AtomicData.find().count() === 0) {
+        // CPK color scheme
+        var hydrogen = 0xffffff;
+        var carbon = 0xc8c8c8;
+        var oxygen = 0xf00000;
+        var nitrogen = 0x8f8fff;
+        var sulfur = 0xffc832;
+        var phosphorus = 0xffa500;
+        var chlorine = 0x00ff00;
+        var bromine = 0xa52a2a;
+        var sodium = 0x0000ff;
+        var magnesium = 0x2a802a;
+        var calcium = 0x808090;
+        var unknown = 0xff1493;
+
         // Calculated Atomic Radius comes from WolframAlpha (converted to Angstrom)
         // --> If no calculated, use empirical
         // --> else if no empirical, use covalent
@@ -39,7 +53,7 @@ if (Meteor.isServer) {
             number: 1,
             name: 'hydrogen',
             symbol: 'h',
-            color: 0xffffff,
+            color: hydrogen,
             atomicRadius: 0.53
         });
 
@@ -990,17 +1004,3 @@ if (Meteor.isServer) {
 if (Meteor.isClient) {
     Meteor.subscribe('atomicdata')
 }
-
-// CPK color scheme
-var hydrogen = 0xffffff;
-var carbon = 0xc8c8c8;
-var oxygen = 0xf00000;
-var nitrogen = 0x8f8fff;
-var sulfur = 0xffc832;
-var phosphorus = 0xffa500;
-var chlorine = 0x00ff00;
-var bromine = 0xa52a2a;
-var sodium = 0x0000ff;
-var magnesium = 0x2a802a;
-var calcium = 0x808090;
-var unknown = 0xff1493;
