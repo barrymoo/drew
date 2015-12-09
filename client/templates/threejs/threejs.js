@@ -69,39 +69,6 @@ render = function () {
 };
 
 animate = function () {
-  console.log('Here');
   requestAnimationFrame(animate);
   controls.update();
-};
-
-/**
- * @name makeBond
- * @summary
- * # Taking two Vector3 make a bond
- * # To do:
- * * Understand this function!
- * ** make 2 cylinders connected in middle which match atom color
- * @param {point1} {THREE.Vector3} - Vector3 atomic position
- * @param {point2} {THREE.Vector3} - Vector3 atomic position
- * @returns {edge} {THREE.Mesh} - The rendered bond.
- */
-makeBond = function (point1, point2) {
-  var material = new THREE.MeshBasicMaterial({color: 0xc8c8c8});
-  var direction = new THREE.Vector3().subVectors(point2, point1);
-  var orientation = new THREE.Matrix4();
-
-  orientation.lookAt(point1, point2, new THREE.Object3D().up);
-
-  orientation.multiply(new THREE.Matrix4().set(1, 0, 0, 0,
-    0, 0, 1, 0,
-    0, -1, 0, 0,
-    0, 0, 0, 1));
-
-  var edgeGeometry = new THREE.CylinderGeometry(0.15, 0.15, direction.length());
-  var edge = new THREE.Mesh(edgeGeometry, material);
-  edge.applyMatrix(orientation);
-  edge.position.x = (point2.x + point1.x) / 2;
-  edge.position.y = (point2.y + point1.y) / 2;
-  edge.position.z = (point2.z + point1.z) / 2;
-  return edge;
 };
