@@ -49,6 +49,7 @@ parserSuccess = function (parsedData) {
     }\
   ";
 
+
   var fragment_shader = "\
     varying vec3 vColor;\
     \
@@ -78,7 +79,11 @@ parserSuccess = function (parsedData) {
     positions[i3 + 2] = parsedData[i].vector.z;
 
     // set sizes
-    sizes[i] = parsedData[i].atomicRadius;
+    if (parsedData[i].atomicRadius >= 1.0) {
+        sizes[i] = 1.0;
+    } else {
+        sizes[i] = parsedData[i].atomicRadius;
+    }
 
     // set colors
     color.setHex(parsedData[i].color);
@@ -97,6 +102,12 @@ parserSuccess = function (parsedData) {
   scene.add(particles);
   render();
 
+  // Update Camera Position
+  var bounds = (particles.geometry.boundingSphere.radius) / Math.tan((camera.fov / 2) * (Math.PI / 180));
+  camera.position.x = particles.geometry.boundingSphere.center.x;
+  camera.position.y = particles.geometry.boundingSphere.center.y;
+  camera.position.z = bounds + 0.5 * bounds;
+
   // Generate Bond Pairs for use of Buffer Geometry
   var bondsGeometry = new THREE.Geometry();
   var distanceTo = 0, bondDistance = 0, pairs = [];
@@ -111,48 +122,31 @@ parserSuccess = function (parsedData) {
     }
   }
 
-  // We'll reuse length, positions, colors, and sizes
-  // --> *4 because we want to use midpoints to separate bonds
+  // We'll reuse length, positions, and colors
+  // --> LineSegments require begin and end point i.e. length * 3 * 2
   length = pairs.length
-  positions = new Float32Array(length * 3 * 4);
-  colors = new Float32Array(length * 3 * 4);
+  positions = new Float32Array(length * 3 * 2);
+  colors = new Float32Array(length * 3 * 2);
 
-  for (var i=0, i4 = 0; i < length; i++, i4 += 12) {
-    // Compute Midpoint
-    var midPoint = new THREE.Vector3();
-    midPoint.subVectors(parsedData[pairs[i][1]].vector, parsedData[pairs[i][0]].vector);
-    midPoint.addVectors(parsedData[pairs[i][0]].vector, midPoint.multiplyScalar(0.5));
-
+  for (var i=0, i6 = 0; i < length; i++, i6 += 6) {
     // Set positions
-    positions[i4 + 0] = parsedData[pairs[i][0]].vector.x;
-    positions[i4 + 1] = parsedData[pairs[i][0]].vector.y;
-    positions[i4 + 2] = parsedData[pairs[i][0]].vector.z;
-    positions[i4 + 3] = midPoint.x;
-    positions[i4 + 4] = midPoint.y;
-    positions[i4 + 5] = midPoint.z;
-    positions[i4 + 6] = midPoint.x;
-    positions[i4 + 7] = midPoint.y;
-    positions[i4 + 8] = midPoint.z;
-    positions[i4 + 9] = parsedData[pairs[i][1]].vector.x;
-    positions[i4 + 10] = parsedData[pairs[i][1]].vector.y;
-    positions[i4 + 11] = parsedData[pairs[i][1]].vector.z;
+    positions[i6 + 0] = parsedData[pairs[i][0]].vector.x;
+    positions[i6 + 1] = parsedData[pairs[i][0]].vector.y;
+    positions[i6 + 2] = parsedData[pairs[i][0]].vector.z;
+    positions[i6 + 3] = parsedData[pairs[i][1]].vector.x;
+    positions[i6 + 4] = parsedData[pairs[i][1]].vector.y;
+    positions[i6 + 5] = parsedData[pairs[i][1]].vector.z;
 
     // Set Colors
     color.setHex(parsedData[pairs[i][0]].color);
-    colors[i4 + 0] = color.r;
-    colors[i4 + 1] = color.g;
-    colors[i4 + 2] = color.b;
-    colors[i4 + 3] = color.r;
-    colors[i4 + 4] = color.g;
-    colors[i4 + 5] = color.b;
+    colors[i6 + 0] = color.r;
+    colors[i6 + 1] = color.g;
+    colors[i6 + 2] = color.b;
 
     color.setHex(parsedData[pairs[i][1]].color);
-    colors[i4 + 6] = color.r;
-    colors[i4 + 7] = color.g;
-    colors[i4 + 8] = color.b;
-    colors[i4 + 9] = color.r;
-    colors[i4 + 10] = color.g;
-    colors[i4 + 11] = color.b;
+    colors[i6 + 3] = color.r;
+    colors[i6 + 4] = color.g;
+    colors[i6 + 5] = color.b;
   }
 
   // Reuse Geometry

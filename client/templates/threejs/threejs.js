@@ -7,7 +7,7 @@ Template.threejsMain.onRendered(function () {
     // Initial Dimensions
     dim = computeSize();
     camera = new THREE.PerspectiveCamera(60, dim[0]/dim[1], 1, 1000);
-    camera.position.z = 200;
+    camera.position.z = 10;
 
     // The Controls
     controls = new THREE.TrackballControls(camera);

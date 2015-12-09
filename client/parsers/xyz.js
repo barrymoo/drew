@@ -8,10 +8,10 @@ xyzParser = function (fileContents) {
 
   try {
     sp = fileContents.split('\n');
-    numParticles = parseInt(sp[0]);
+    numParticles = parseInt(tokenize(sp[0])[0]);
 
     for (i = 0; i < numParticles; i++) {
-        coord = sp[i+2].split(/[ ]+/);
+        coord = tokenize(sp[i+2]);
         object = AtomicData.findOne({symbol: coord[0].toLowerCase()});
 
         floatVector = coord.slice(1).map(Number);
