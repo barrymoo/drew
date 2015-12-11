@@ -99,14 +99,13 @@ parserSuccess = function (parsedData) {
   geometry.addAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   var particles = new THREE.Points(geometry, material);
-  scene.add(particles);
+  var translateToCenter = particles.geometry.center();
+  console.log(scene.add(particles));
   render();
 
-  // Update Camera Position
-  var bounds = (particles.geometry.boundingSphere.radius) / Math.tan((camera.fov / 2) * (Math.PI / 180));
-  camera.position.x = particles.geometry.boundingSphere.center.x;
-  camera.position.y = particles.geometry.boundingSphere.center.y;
-  camera.position.z = bounds + 0.5 * bounds;
+  // Centered Atoms and Bonds (below), now adjust camera
+  var cameraToCenterDistance = (particles.geometry.boundingSphere.radius) / (Math.tan(camera.fov / 2.5 * Math.PI / 180));
+  camera.position.z = cameraToCenterDistance; 
 
   // Generate Bond Pairs for use of Buffer Geometry
   var bondsGeometry = new THREE.Geometry();
@@ -156,6 +155,7 @@ parserSuccess = function (parsedData) {
 
   var bondMaterial = new THREE.LineBasicMaterial({linewidth: 5, vertexColors: THREE.VertexColors});
   var bondLineSegments = new THREE.LineSegments(geometry, bondMaterial);
+  bondLineSegments.geometry.translate(translateToCenter.x, translateToCenter.y, translateToCenter.z);
   scene.add(bondLineSegments);
   render();
 };
