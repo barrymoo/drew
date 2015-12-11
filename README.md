@@ -5,13 +5,15 @@ what distribution you use.
 
 ## Goals
 
-Develop an online Molecular Editor for Chemists using Three.js. 
+Develop a cross-platform online Molecular Editor for Chemists using Meteor and Three.js.
 
 ## Current Status
 
-Currently, one can open up XYZ files and see atoms and bonds! Feel free to open
+* One can open up XYZ files and see atoms and bonds! Feel free to open
 a huge protein for example (I have done up to 3500 atoms with bonds, I would
 love to know the limit!).
+* On commits to master, application is deployed via Heroku
+* Application should work on anything with WebGL (even your phone!)
 
 ## Using the application
 
@@ -21,7 +23,8 @@ love to know the limit!).
 ## Contributing
 
 * Fork the repository
-* Make you changes/patches
+* Make changes/patches
+* Ensure changes/patches are working
 * Submit a pull request
 
 ## "Building" from GitHub Repo
@@ -41,7 +44,7 @@ love to know the limit!).
 ## Writing a file parser
 
 Let's say your favorite file extension is XYZ (note we already support this file type
-and you should use `client/parsers/xyz.js` as an example)
+and you should use `client/parsers/xyz.js` as a guiding example)
 
 1. In `client/parsers` add your parser file `xyz.js`
 2. Write your parser:
@@ -53,7 +56,7 @@ and you should use `client/parsers/xyz.js` as an example)
   tokenizer function
 3. Register the file extension in `client/parsers/master.js`
 4. Test!
-5. Add your extension to the Supported File Types List Below
+5. Add your extension to the Supported File Types List (below)
 
 ## Supported File Types
 
@@ -69,7 +72,7 @@ Submit an issue!
 * Clean up and add more documentation
 * Check the code structure and cleanliness
 * Create contribution guidelines
-* Make sidebar more dynamic
+* Remove sidebar idea, it's a terrible design for mobile
 * Make templates prettier (probably switch to React.js)
 
 ## Tools and References
