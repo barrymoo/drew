@@ -100,7 +100,7 @@ parserSuccess = function (parsedData) {
 
   var particles = new THREE.Points(geometry, material);
   var translateToCenter = particles.geometry.center();
-  console.log(scene.add(particles));
+  scene.add(particles);
   render();
 
   // Centered Atoms and Bonds (below), now adjust camera

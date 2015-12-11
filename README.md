@@ -9,9 +9,9 @@ Develop a cross-platform online Molecular Editor for Chemists using Meteor and T
 
 ## Current Status
 
-* One can open up XYZ files and see atoms and bonds! Feel free to open
-a huge protein for example (I have done up to 3500 atoms with bonds, I would
-love to know the limit!).
+* One can open up XYZ files and see atoms and bonds! Feel free to open a huge
+  protein for example (I have done up to 8800 atoms with bonds, I would love to
+  know the limit!).
 * On commits to master, application is deployed via Heroku
 * Application should work on anything with WebGL (even your phone!)
 
