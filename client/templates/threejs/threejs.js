@@ -26,7 +26,6 @@ Template.threejsMain.onRendered(function () {
     var canvas = document.getElementById("threejsCanvas");
     renderer = new THREE.WebGLRenderer({canvas: canvas});
     renderer.setSize(dim[0], dim[1]);
-
     render();
     animate();
 });
@@ -55,7 +54,7 @@ Template.threejsMain.rendered = function () {
 function computeSize () {
   // Do some math to compute threejsMain size
   var height = window.innerHeight - 2 * $(header).height() - $(footer).height();
-  var width = $(columns).width() - $(sidebar).width() - $(sidebar).css("padding-right").replace("px","");
+  var width = $(viewport).width();
   return [width, height];
 }
 
