@@ -13,7 +13,7 @@ masterParser = function (file) {
   var fileExt = file.name.split('.').pop();
   var reader = new FileReader();
 
-  reader.onload = function (e) {
+  reader.onload = function () {
     if (fileExt === 'xyz') {
       xyzParser(reader.result);
     } else {
@@ -35,7 +35,7 @@ masterParser = function (file) {
  * @param {Object} parsedData A special data type, see {@link xyzParser}
  */
 parserSuccess = function (parsedData) {
-  // Shaders and ShaderMaterial
+  // Shader and ShaderMaterial
   var vertex_shader = "\
     attribute float size;\
     attribute vec3 color;\
@@ -64,7 +64,7 @@ parserSuccess = function (parsedData) {
     vertexShader: vertex_shader,
     fragmentShader: fragment_shader,
     transparent: false
-  })
+  });
 
   // Get the BufferGeometry attributes
   var length = parsedData.length;
@@ -87,8 +87,8 @@ parserSuccess = function (parsedData) {
 
     // set colors
     color.setHex(parsedData[i].color);
-    colors[i3] = color.r
-    colors[i3 + 1] = color.g
+    colors[i3] = color.r;
+    colors[i3 + 1] = color.g;
     colors[i3 + 2] = color.b
   }
 
@@ -104,11 +104,9 @@ parserSuccess = function (parsedData) {
   render();
 
   // Centered Atoms and Bonds (below), now adjust camera
-  var cameraToCenterDistance = (particles.geometry.boundingSphere.radius) / (Math.tan(camera.fov / 2.5 * Math.PI / 180));
-  camera.position.z = cameraToCenterDistance; 
+  camera.position.z = (particles.geometry.boundingSphere.radius) / (Math.tan (camera.fov / 2.5 * Math.PI / 180));
 
   // Generate Bond Pairs for use of Buffer Geometry
-  var bondsGeometry = new THREE.Geometry();
   var distanceTo = 0, bondDistance = 0, pairs = [];
   for (var i = 0; i < length; i++) {
     for (var j = i + 1; j < length; j++) {
@@ -123,11 +121,11 @@ parserSuccess = function (parsedData) {
 
   // We'll reuse length, positions, and colors
   // --> LineSegments require begin and end point i.e. length * 3 * 2
-  length = pairs.length
+  length = pairs.length;
   positions = new Float32Array(length * 3 * 2);
   colors = new Float32Array(length * 3 * 2);
 
-  for (var i=0, i6 = 0; i < length; i++, i6 += 6) {
+  for (var i = 0, i6 = 0; i < length; i++, i6 += 6) {
     // Set positions
     positions[i6 + 0] = parsedData[pairs[i][0]].vector.x;
     positions[i6 + 1] = parsedData[pairs[i][0]].vector.y;
