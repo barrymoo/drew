@@ -72,7 +72,7 @@ Submit an issue!
 * Clean up and add more documentation
 * Check the code structure and cleanliness
 * Create contribution guidelines
-* Remove sidebar idea, it's a terrible design for mobile
+* Remove sidebar, switch to a Modal Bootstrap setup
 * Make templates prettier (probably switch to React.js)
 
 ## Tools and References
