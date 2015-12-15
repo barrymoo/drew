@@ -49,7 +49,6 @@ parserSuccess = function (parsedData) {
     }\
   ";
 
-
   var fragment_shader = "\
     varying vec3 vColor;\
     \
